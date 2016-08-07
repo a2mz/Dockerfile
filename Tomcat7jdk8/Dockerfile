@@ -100,11 +100,16 @@ RUN set -e \
 		echo >&2 "$nativeLines"; \
 		exit 1; \
 	fi
-
+# morozov add mc, defauld config and jprofile
 RUN set -x \
         && apt-get update && apt-get install -y mc \
 	&& wget -O $CATALINA_HOME/conf/tomcat-users.xml "https://raw.githubusercontent.com/a2mz/Dockerfile/master/Tomcat7jdk8/tomcat-users.xml" \
-       	&& wget -O $CATALINA_HOME/conf/context.xml "https://raw.githubusercontent.com/a2mz/Dockerfile/master/Tomcat7jdk8/context.xml" 
+       	&& wget -O $CATALINA_HOME/conf/context.xml "https://raw.githubusercontent.com/a2mz/Dockerfile/master/Tomcat7jdk8/context.xml"  \
+        && wget http://download-aws.ej-technologies.com/jprofiler/jprofiler_linux_8_1_2.tar.gz -P /tmp/ \
+        && tar -xzf /tmp/jprofiler_linux_8_1_2.tar.gz -C /usr/local \
+        && rm /tmp/jprofiler_linux_8_1_2.tar.gz
 
-EXPOSE 8080
+ENV CATALINA_OPTS -agentpath:/usr/local/jprofiler8/bin/linux-x64/libjprofilerti.so=port=8849,nowait
+EXPOSE 8080 8849
+
 CMD ["catalina.sh", "run"]
