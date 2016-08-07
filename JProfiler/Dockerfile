@@ -1,4 +1,5 @@
-FROM dockerfile/java:oracle-java8
+FROM java:8-jre
+
 MAINTAINER zeder <mx681121@gmail.com>
 
 RUN wget http://download-aws.ej-technologies.com/jprofiler/jprofiler_linux_8_1_2.tar.gz -P /tmp/ && \
