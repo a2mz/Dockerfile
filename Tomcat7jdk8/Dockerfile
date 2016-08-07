@@ -103,8 +103,8 @@ RUN set -e \
 
 RUN set -x \
         && apt-get update && apt-get install -y mc \
-	&& wget -O $CATALINA_HOME/conf/tomcat-users.xml "https://gist.githubusercontent.com/a2mz/9ae0bd7a9a383042c8d3f27dedeea9e0/raw/8666e688ce3064fc5ac7927b5e4fc617f46cfd7f/tomcat-users.xml" \
-       	&& wget -O $CATALINA_HOME/conf/context.xml "https://gist.githubusercontent.com/a2mz/a1eecde43beb3cbcc4cfbb6222a1859d/raw/21f3dfaa4c2696c9ef0defda88ebe2b0c50ec4bc/context.xml" 
+	&& wget -O $CATALINA_HOME/conf/tomcat-users.xml "https://raw.githubusercontent.com/a2mz/Dockerfile/master/Tomcat7jdk8/tomcat-users.xml" \
+       	&& wget -O $CATALINA_HOME/conf/context.xml "https://raw.githubusercontent.com/a2mz/Dockerfile/master/Tomcat7jdk8/context.xml" 
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
